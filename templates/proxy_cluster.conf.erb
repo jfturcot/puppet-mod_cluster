@@ -1,0 +1,28 @@
+Listen <%= scope.lookupvar('::ipaddress_eth1') -%>:6666
+<VirtualHost <%= scope.lookupvar('::ipaddress_eth1') -%>:6666>
+
+  <Directory "/">
+    Order deny,allow
+    Deny from all
+    Allow from all
+  </Directory>
+
+  KeepAliveTimeout 60
+  MaxKeepAliveRequests 0
+
+  EnableMCPMReceive
+
+  ManagerBalancerName my-cluster
+  AllowDisplay On
+
+  AdvertiseFrequency 5
+
+ <Location /mod_cluster-manager>
+    SetHandler mod_cluster-manager
+    Order deny,allow
+    #Deny from all
+    Allow from 127.0.0.1
+ </Location>
+
+</VirtualHost>
+
