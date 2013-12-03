@@ -1,7 +1,5 @@
 NameVirtualHost *:80
 <VirtualHost *:80>
-    ServerAdmin admin@solution30.com
-    ServerName web-01.production.solution30.com
 
     ProxyPass / balancer://my-cluster stickysession=JSESSIONID|jsessionid
     ProxyPassReverse / balancer://my-cluster
