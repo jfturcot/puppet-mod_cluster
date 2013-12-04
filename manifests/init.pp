@@ -76,16 +76,15 @@ class mod_cluster {
     notify    => Service[apache2],
   }
 
-  file { "/etc/apache2/sites-available/mod_cluster":
+  file { "/etc/apache2/sites-available/zzzzz_mod_cluster":
     ensure    => file,
-    path      => "/etc/apache2/sites-available/mod_cluster",
     content   => template('mod_cluster/mod_cluster'),
     require   => Exec['Enable proxy_cluster'],
   }
 
-  exec { "a2ensite mod_cluster":
+  exec { "a2ensite zzzzz_mod_cluster":
     path      => $path,
-    require   => File['/etc/apache2/sites-available/mod_cluster'],
+    require   => File['/etc/apache2/sites-available/zzzzz_mod_cluster'],
     notify    => Service['apache2'],
   }
 
